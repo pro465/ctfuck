@@ -73,8 +73,8 @@ fn translate(prog: Vec<u8>) -> Vec<Instr> {
         let translated_instr = match b {
             b'?' => Instr::If,
             b'#' => Instr::Skip,
-            b'/' => Instr::Push(true),
-            b'\\' => Instr::Push(false),
+            b'0' => Instr::Push(false),
+            b'1' => Instr::Push(true),
             b'[' => {
                 starts.push(translated.len());
                 translated.push(Instr::LoopStart);
