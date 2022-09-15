@@ -29,9 +29,9 @@ tagfuck is turing complete. To prove this, we can take a similar path to how [BC
 | `;` | `[#]` |
 
 # The `#` command
-Technically, I could do with just a separate pop command rather than integrating it into `[` (then I'd not need `#` to prove it's turing complete), but I chose to do what I did because I found that `#` interacts nicely with other commands in atleast 3 convenient ways (that i could find):
-    - `[#]` brings back the pop command.
-    - `#[<code>]` brings back the "loop without popping" command.
-    - `?#` works as an "if not" command.
+Technically, I could do with just a separate pop command rather than integrating it into `[` (then I'd not need `#` to prove it's turing complete), but I chose to do what I did because I found that `#` interacts nicely with other commands in atleast 3 convenient ways (that I could find):
+ 1. `[#]` brings back the pop command.
+ 2. `#[<code>]` brings back the "loop without popping" command.
+ 3. added bonus: `?#` works as an "if not" command.
 
 So, it alows what I'd get with a separate pop command, as well as introducing a new "if not" command. And that's just what i could find...
