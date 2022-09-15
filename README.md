@@ -18,7 +18,7 @@ supported commands are:
 | `.` | output the bit the front of the queue |
 
 # Turing Completeness
-tagfuck is turing complete. To prove this, we can take a similar path to how BCT was proved turing complete: we can translate each CT command to an equivalent Tagfuck sequence of commands.
+tagfuck is turing complete. To prove this, we can take a similar path to how [BCT](https://esolangs.org/wiki/Bitwise_Cyclic_Tag) was proved turing complete: we can translate each CT command to an equivalent Tagfuck sequence of commands.
 
 | CT command | Tagf Equivalent |
 | ---------- | --------------- |
