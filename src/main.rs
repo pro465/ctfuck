@@ -33,8 +33,8 @@ macro_rules! unwrap {
 struct Buf(u8, u8);
 
 impl Buf {
-    fn new(x: u8) -> Self {
-        Self(x, 0)
+    fn new() -> Self {
+        Self(0, 0)
     }
 
     fn push(&mut self, bit: bool) {
@@ -109,8 +109,8 @@ impl Vm {
     fn new(prog: Vec<u8>) -> Self {
         let queue = VecDeque::<bool>::new();
         let bytes = io::stdin().bytes();
-        let inp = Buf::new(0);
-        let out = Buf::new(0);
+        let inp = Buf::new();
+        let out = Buf::new();
 
         Self {
             queue,
@@ -151,8 +151,7 @@ impl Vm {
                             .write_all(&[self.out.0.reverse_bits()])
                             .expect("failed to write to stdout");
 
-                        self.out.0 = 0;
-                        self.out.1 = 0;
+                        self.out = Buf::new();
                     }
                 }
 
