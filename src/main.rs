@@ -77,8 +77,7 @@ fn translate(prog: Vec<u8>) -> Vec<Instr> {
             b'1' => Instr::Push(true),
             b'[' => {
                 starts.push(translated.len());
-                translated.push(Instr::LoopStart);
-                continue;
+                Instr::LoopStart
             }
             b']' => {
                 let corr = starts.pop().expect("mismatched brackets");
