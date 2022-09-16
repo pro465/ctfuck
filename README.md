@@ -28,7 +28,11 @@ CTFuck is turing complete. To prove this, we can take a similar path to how [BCT
 | `1` | `?1` |
 | `;` | `[#]` |
 
-# The `#` command
+# Notes
+## IO is big endian
+Unlike BoolFuck, IO in CTF is big-endian, which means if you do `,,` and input something like `@`, (`0100 0000` in binary), then unlike Boolfuck, you'd first push `0` and then `1`. output would behave the same way: `0.1.0......` would print `@` to stdout.
+
+## The `#` command
 Technically, I could do with just a separate pop command rather than integrating it into `[` (then I'd not need `#` to prove it's turing complete), but I chose to do what I did because I found that `#` interacts nicely with other commands in atleast 3 convenient ways (that I could find):
  1. `[#]` brings back the pop command.
  2. `#[<code>]` brings back the "loop without popping" command.
