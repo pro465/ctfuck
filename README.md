@@ -1,7 +1,7 @@
-# ctfuck
+# CTFuck
 a turing complete esolang based on a tag system, with I/O support.
 this is kinda simliar to Boolfuck, in that it operates on bits and has I/O support.
-however, Tagfuck is based on a tag system.
+however, CTFuck is based on a tag system.
 
 # Commands
 
