@@ -22,11 +22,11 @@ CTFuck is turing complete. To prove this, we can take a similar path to how [BCT
 
 | CT command | CTF Equivalent |
 | ---------- | --------------- |
-| \<program start\> | `#[` |
-| \<program end\> | `]` |
-| `0` | `?0` |
-| `1` | `?1` |
-| `;` | `[#]` |
+| \<program start\> | `#[[` |
+| \<program end\> | `#]]` |
+| `0` | `0` |
+| `1` | `1` |
+| `;` | `#][` |
 
 # Notes
 ## IO is big endian
