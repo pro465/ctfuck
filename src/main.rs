@@ -60,7 +60,7 @@ enum Instr {
     Input,
     Output,
     Push(bool),
-    LoopStart,
+    LoopStart(usize),
     LoopEnd(usize),
 }
 
@@ -77,10 +77,11 @@ fn translate(prog: Vec<u8>) -> Vec<Instr> {
             b'1' => Instr::Push(true),
             b'[' => {
                 starts.push(translated.len());
-                Instr::LoopStart
+                Instr::LoopStart(0)
             }
             b']' => {
                 let corr = starts.pop().expect("mismatched brackets");
+                translated[corr] = Instr::LoopStart(translated.len());
                 Instr::LoopEnd(corr)
             }
             b',' => Instr::Input,
@@ -155,8 +156,10 @@ impl Vm {
                     }
                 }
 
-                Instr::LoopStart => {
-                    unwrap!(self.queue.pop_front());
+                Instr::LoopStart(end) => {
+                    if !unwrap!(self.queue.pop_front()) {
+                        pc = end;
+                    }
                 }
 
                 Instr::LoopEnd(start) => {

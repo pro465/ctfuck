@@ -11,7 +11,7 @@ supported commands are:
 | `#` | skip next command |
 | `0` | push `0` to the back of queue |
 | `1` | push `1` to the back of queue |
-| `[` | pop 1 bit off the front of queue |
+| `[` | pop 1 bit off the front of queue; if it is `0`, jump to just after the matching `]` |
 | `]` | jump to the command just after the matching `[` |
 | `?` | if value at front of queue is `0`, skip the next command |
 | `.` | output the bit at the front of the queue |
