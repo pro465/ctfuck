@@ -44,10 +44,10 @@ impl Buf {
     }
 
     fn pop(&mut self) -> Option<bool> {
-        if self.1 == 0 {
+        if self.1 == 8 {
             None
         } else {
-            self.1 -= 1;
+            self.1 += 1;
             Some((self.0 >> self.1) & 1 > 0)
         }
     }
@@ -170,7 +170,7 @@ impl Vm {
                     let inp = match self.inp.pop() {
                         Some(x) => x,
                         _ => {
-                            self.inp = Buf(unwrap!(self.bytes.next()).unwrap(), 8);
+                            self.inp = Buf(unwrap!(self.bytes.next()).unwrap(), 0);
                             self.inp.pop().unwrap()
                         }
                     };
@@ -183,7 +183,7 @@ impl Vm {
 
                     if self.out.1 >= 8 {
                         io::stdout()
-                            .write_all(&[self.out.0.reverse_bits()])
+                            .write_all(&[self.out.0])
                             .expect("failed to write to stdout");
 
                         self.out = Buf::new();
