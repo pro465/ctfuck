@@ -31,7 +31,11 @@ where the nth `@`'s rank is defined as n.
 # Notes
 ## The `[if_num|else_num]` command
 it takes two numbers in bijective base-10 format, separated by `|` (pipe symbol).
-when it is executed, it checks the bit at the top of the queue; if it is 1 it calls `goto(if_num)`, otherwise it calls `goto(else_num)`, where `goto(n)` is defined as follows:
+
+when it is executed, it checks the bit at the top of the queue;
+if it is 1 it calls `goto(if_num)`, otherwise it calls `goto(else_num)`.
+
+where `goto(n)` is defined as follows:
     if n is empty, (meaning this command is of the form `[|<non-empty>]`, `[<non-empty>|]`, or `[|]`), just go to the next command.
     otherwise jump to the `n`th `@` in the program.
 
