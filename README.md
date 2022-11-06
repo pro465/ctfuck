@@ -10,7 +10,7 @@ supported commands are:
 | -------- | --------- |
 | `0` | push `0` to the back of queue |
 | `1` | push `1` to the back of queue |
-| `$` | pop 1 bit off the fornt of the queue |
+| `$` | pop 1 bit off the front of the queue |
 | `.` | output the bit at the front of the queue |
 | `,` | get the next bit of input and push it to the back of the queue |
 | `[if_num\|else_num]` | see [note](#the-if_numelse_num-command) |
