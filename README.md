@@ -39,5 +39,5 @@ where `goto(n)` is defined as follows:
     if n is empty, (meaning this command is of the form `[|<non-empty>]`, `[<non-empty>|]`, or `[|]`), just go to the next command.
     otherwise jump to the `n`th `@` in the program.
 
-## IO is big endian
-Unlike BoolFuck, IO in CTF is big-endian, which means if you do `,,` and input something like `@`, (`0100 0000` in binary), then unlike Boolfuck, you'd first push `0` and then `1`. output would behave the same way: `0.1.0......` would print `@` to stdout.
+## IO endianness
+Like BoolFuck, IO in CTF is little-endian.
