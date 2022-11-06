@@ -24,7 +24,7 @@ CTFuck is turing complete. To prove this, we can take a similar path to how [BCT
 | \<program end\> | `[1|1]` |
 | `0` | `0` |
 | `1` | `1` |
-| `;` | `@$[|\<next @'s rank\>]` |
+| `;` | `@$[\|\<next @'s rank\>]` |
 
 where the nth `@`'s rank is defined as n.
 
