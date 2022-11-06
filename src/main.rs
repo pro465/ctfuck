@@ -47,8 +47,9 @@ impl Buf {
         if self.1 == 8 {
             None
         } else {
+            let res = Some((self.0 >> self.1) & 1 > 0);
             self.1 += 1;
-            Some((self.0 >> self.1) & 1 > 0)
+            res
         }
     }
 }
