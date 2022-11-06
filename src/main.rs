@@ -145,7 +145,7 @@ impl Vm {
     fn new(prog: Vec<u8>) -> Self {
         let queue = VecDeque::<bool>::new();
         let bytes = io::stdin().bytes();
-        let inp = Buf::new();
+        let inp = Buf(0, 8);
         let out = Buf::new();
 
         Self {
