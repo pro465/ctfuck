@@ -13,7 +13,7 @@ supported commands are:
 | `$` | pop 1 bit off the fornt of the queue |
 | `.` | output the bit at the front of the queue |
 | `,` | get the next bit of input and push it to the back of the queue |
-| `[if_num\|else_num]` | see note |
+| `[if_num\|else_num]` | see [note](#the-if_numelse_num-command) |
 
 # Turing Completeness
 CTFuck is turing complete. To prove this, we can take a similar path to how [BCT](https://esolangs.org/wiki/Bitwise_Cyclic_Tag) was proved turing complete: we can translate each CT (we are using the same language the BCT page used) command to an equivalent sequence of commands in CTFuck.
