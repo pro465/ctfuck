@@ -55,35 +55,28 @@ impl Buf {
 
 #[derive(Debug)]
 enum Instr {
-    If,
-    Skip,
+    Pop,
     Input,
     Output,
     Push(bool),
-    LoopStart(usize),
-    LoopEnd(usize),
+    Jmp(usize, usize),
 }
 
 fn translate(prog: Vec<u8>) -> Vec<Instr> {
     let mut translated = Vec::new();
-    let mut starts = Vec::new();
     let mut prog = prog.into_iter();
+    let mut loc = Vec::new();
 
     while let Some(b) = prog.next() {
         let translated_instr = match b {
-            b'?' => Instr::If,
-            b'#' => Instr::Skip,
+            b'@' => {
+                loc.push(translated.len());
+                continue;
+            }
+            b'$' => Instr::Pop,
             b'0' => Instr::Push(false),
             b'1' => Instr::Push(true),
-            b'[' => {
-                starts.push(translated.len());
-                Instr::LoopStart(0)
-            }
-            b']' => {
-                let corr = starts.pop().expect("mismatched brackets");
-                translated[corr] = Instr::LoopStart(translated.len());
-                Instr::LoopEnd(corr)
-            }
+            b'[' => parse_cond(&mut prog),
             b',' => Instr::Input,
             b'.' => Instr::Output,
 
@@ -93,9 +86,50 @@ fn translate(prog: Vec<u8>) -> Vec<Instr> {
         translated.push(translated_instr);
     }
 
-    assert!(starts.is_empty(), "mismatched brackets");
+    for (i, x) in translated.iter_mut().enumerate() {
+        if let Instr::Jmp(x, y) = x {
+            let f = |x: &mut usize| *x = if *x == 0 { i + 1 } else { loc[*x - 1] };
+
+            f(x);
+            f(y);
+        }
+    }
 
     translated
+}
+
+fn parse_cond(x: &mut impl Iterator<Item = u8>) -> Instr {
+    let if_ = parse_int(x, b'|');
+    let else_ = parse_int(x, b']');
+    Instr::Jmp(if_, else_)
+}
+
+fn parse_int(x: &mut impl Iterator<Item = u8>, end: u8) -> usize {
+    let mut res = 0;
+
+    loop {
+        let c = x
+            .next()
+            .unwrap_or_else(|| panic!("expected {} or number, found EOF", end as char))
+            .to_ascii_lowercase();
+
+        if c == end {
+            break;
+        }
+
+        res = res * 10 + parse_byte(c);
+    }
+
+    res
+}
+
+fn parse_byte(c: u8) -> usize {
+    (match c {
+        b'1'..=b'9' => c - b'0',
+        b'a' => 10,
+        _ => panic!("unexpected character during conditional jump parsing"),
+    })
+    .into()
 }
 
 struct Vm {
@@ -156,24 +190,18 @@ impl Vm {
                     }
                 }
 
-                Instr::LoopStart(end) => {
-                    if !unwrap!(self.queue.pop_front()) {
-                        pc = end;
+                Instr::Jmp(if_, else_) => {
+                    if *unwrap!(self.queue.get(0)) {
+                        pc = if_;
+                    } else {
+                        pc = else_;
                     }
+
+                    continue;
                 }
 
-                Instr::LoopEnd(start) => {
-                    pc = start;
-                }
-
-                Instr::If => {
-                    if !*unwrap!(self.queue.get(0)) {
-                        pc += 1;
-                    }
-                }
-
-                Instr::Skip => {
-                    pc += 1;
+                Instr::Pop => {
+                    unwrap!(self.queue.pop_front());
                 }
             }
 
