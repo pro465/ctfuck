@@ -20,24 +20,19 @@ CTFuck is turing complete. To prove this, we can take a similar path to how [BCT
 
 | CT command | CTF Equivalent |
 | ---------- | --------------- |
-| \<program start\> | `@` |
 | \<program end\> | `[1\|1]` |
 | `0` | `0` |
 | `1` | `1` |
-| `;` | `@$[\|<next @'s rank>]` |
-
-where the nth `@`'s rank is defined as n.
+| `;` | `\\n$[\|\<current line + 1\>]` |
 
 # Notes
 ## The `[if_num|else_num]` command
-it takes two numbers in bijective base-10 format, separated by `|` (pipe symbol).
+it takes two numbers in base-10 format, separated by `|` (pipe symbol).
 
 when it is executed, it checks the bit at the top of the queue;
 if it is 1 it calls `goto(if_num)`, otherwise it calls `goto(else_num)`.
 
-where `goto(n)` is defined as follows:
-    if n is empty, (meaning this command is of the form `[|<non-empty>]`, `[<non-empty>|]`, or `[|]`), just go to the next command.
-    otherwise jump to the `n`th `@` in the program.
+`goto(n)` does the following: if `n` is 0 or empty it does nothing, otherwise it jumps to the first command in line `n`.
 
 ## IO endianness
 Like BoolFuck, IO in CTF is little-endian.

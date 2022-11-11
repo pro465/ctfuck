@@ -66,11 +66,11 @@ enum Instr {
 fn translate(prog: Vec<u8>) -> Vec<Instr> {
     let mut translated = Vec::new();
     let mut prog = prog.into_iter();
-    let mut loc = Vec::new();
+    let mut loc = vec![0];
 
     while let Some(b) = prog.next() {
         let translated_instr = match b {
-            b'@' => {
+            b'\n' => {
                 loc.push(translated.len());
                 continue;
             }
@@ -126,8 +126,7 @@ fn parse_int(x: &mut impl Iterator<Item = u8>, end: u8) -> usize {
 
 fn parse_byte(c: u8) -> usize {
     (match c {
-        b'1'..=b'9' => c - b'0',
-        b'a' => 10,
+        b'0'..=b'9' => c - b'0',
         _ => panic!("unexpected character during conditional jump parsing"),
     })
     .into()
