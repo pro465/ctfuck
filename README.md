@@ -20,7 +20,7 @@ CTFuck is turing complete. To prove this, we can take a similar path to how [BCT
 
 | CT command | CTF Equivalent |
 | ---------- | --------------- |
-| \<program end\> | `[1\|1]` |
+| \<program end\> | `\\n[1\|1]` |
 | `0` | `0` |
 | `1` | `1` |
 | `;` | `\\n$[\|\<current line + 1\>]` |
