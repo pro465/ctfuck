@@ -15,6 +15,8 @@ supported commands are:
 | `,` | get the next bit of input and push it to the back of the queue |
 | `[if_num\|else_num]` | see [note](#the-if_numelse_num-command) |
 
+any character other than these are ignored.
+
 # Turing Completeness
 CTFuck is turing complete. To prove this, we can take a similar path to how [BCT](https://esolangs.org/wiki/Bitwise_Cyclic_Tag) was proved turing complete: we can translate each CT (we are using the same language the BCT page used) command to an equivalent sequence of commands in CTFuck.
 
