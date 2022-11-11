@@ -20,10 +20,10 @@ CTFuck is turing complete. To prove this, we can take a similar path to how [BCT
 
 | CT command | CTF Equivalent |
 | ---------- | --------------- |
-| \<program end\> | `\\n[1\|1]` |
+| \<program end\> | `\n[1\|1]` |
 | `0` | `0` |
 | `1` | `1` |
-| `;` | `\\n$[\|\<current line + 1\>]` |
+| `;` | `\n$[\|<current line + 1>]` |
 
 # Notes
 ## The `[if_num|else_num]` command
