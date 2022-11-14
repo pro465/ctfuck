@@ -38,3 +38,7 @@ if it is 1 it calls `goto(if_num)`, otherwise it calls `goto(else_num)`.
 
 ## IO endianness
 Like BoolFuck, IO in CTF is little-endian.
+
+## efficiency
+
+while designing a [boolfuck to ctfuck compiler](https://github.com/pro465/btcc), i found that CTFuck is as efficient as a Clockwise Turing Machine. but that does not outdate the name, as long as we ignore the M in Machine...
