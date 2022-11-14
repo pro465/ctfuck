@@ -27,6 +27,8 @@ CTFuck is turing complete. To prove this, we can take a similar path to how [BCT
 | `1` | `1` |
 | `;` | `\n$[\|<current line + 1>]` |
 
+...or we can just [compile boolfuck to it](https://github.com/pro465/btcc)
+
 # Notes
 ## The `[if_num|else_num]` command
 it takes two numbers in base-10 format, separated by `|` (pipe symbol).
