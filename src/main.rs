@@ -207,5 +207,11 @@ impl Vm {
 
             pc += 1
         }
+
+        if self.out.1 > 0 {
+            io::stdout()
+                .write_all(&[self.out.0])
+                .expect("failed to write to stdout");
+        }
     }
 }
