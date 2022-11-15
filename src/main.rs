@@ -170,7 +170,7 @@ impl Vm {
                     let inp = match self.inp.pop() {
                         Some(x) => x,
                         _ => {
-                            self.inp = Buf(unwrap!(self.bytes.next()).unwrap(), 0);
+                            self.inp = Buf(self.bytes.next().unwrap_or(Ok(0)).unwrap(), 0);
                             self.inp.pop().unwrap()
                         }
                     };
