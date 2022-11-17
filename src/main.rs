@@ -182,9 +182,12 @@ impl Vm {
                     self.out.push(*unwrap!(self.queue.get(0)));
 
                     if self.out.1 >= 8 {
-                        io::stdout()
+                        let mut stdout = io::stdout();
+
+                        stdout
                             .write_all(&[self.out.0])
                             .expect("failed to write to stdout");
+                        stdout.flush().unwrap();
 
                         self.out = Buf::new();
                     }
