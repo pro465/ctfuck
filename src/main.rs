@@ -16,7 +16,7 @@ fn main() {
 fn help() -> ! {
     println!(
         "usage: {} <filename>",
-        std::env::current_exe().unwrap_or("tag".into()).display()
+        std::env::current_exe().unwrap_or("ctfuck".into()).display()
     );
     std::process::exit(-1);
 }
