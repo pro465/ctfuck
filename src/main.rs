@@ -56,6 +56,7 @@ impl Buf {
 
 #[derive(Debug)]
 enum Instr {
+    Dup,
     Pop,
     Input,
     Output,
@@ -74,6 +75,7 @@ fn translate(prog: Vec<u8>) -> Vec<Instr> {
                 loc.push(translated.len());
                 continue;
             }
+            b':' => Instr::Dup,
             b'$' => Instr::Pop,
             b'0' => Instr::Push(false),
             b'1' => Instr::Push(true),
@@ -205,6 +207,10 @@ impl Vm {
 
                 Instr::Pop => {
                     unwrap!(self.queue.pop_front());
+                }
+
+                Instr::Dup => {
+                    self.queue.push_back(*unwrap!(self.queue.get(0)));
                 }
             }
 

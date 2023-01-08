@@ -11,6 +11,7 @@ supported commands are:
 | `0` | push `0` to the back of queue |
 | `1` | push `1` to the back of queue |
 | `$` | pop 1 bit off the front of the queue |
+| `:` | duplicate the bit at the front of queue and push it to the back |
 | `.` | output the bit at the front of the queue |
 | `,` | get the next bit of input and push it to the back of the queue |
 | `[if_num\|else_num]` | see [note](#the-if_numelse_num-command) |
@@ -33,7 +34,7 @@ CTFuck is turing complete. To prove this, we can take a similar path to how [BCT
 ## The `[if_num|else_num]` command
 it takes two numbers in base-10 format, separated by `|` (pipe symbol).
 
-when it is executed, it checks the bit at the top of the queue;
+when it is executed, it pops and checks the bit at the top of the queue;
 if it is 1 it calls `goto(if_num)`, otherwise it calls `goto(else_num)`.
 
 `goto(n)` does the following: if `n` is 0 or empty it does nothing, otherwise it jumps to the first command in line `n`.
